@@ -1,0 +1,3 @@
+# tsup bundles with esbuild, whose install script fetches the platform binary.
+allowBuilds:
+  esbuild: true

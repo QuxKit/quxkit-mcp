@@ -1,0 +1,35 @@
+# CI — lint, typecheck, build and the test suite on Node 22 and 24.
+#
+# No kit is installed in CI, on purpose.
+#
+# The server's whole job is deciding what to mount from what it finds, and the
+# interesting cases are "nothing installed", "one kit installed", and "a kit
+# present but broken". All three are reachable with fake kit modules and none
+# needs a real kit — which is also the evidence that this package genuinely
+# depends on none of them.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm build
+      - run: pnpm test
