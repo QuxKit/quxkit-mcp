@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "description": "One MCP server for the QuxKit family \u2014 it mounts the tools of whichever kits are installed, rather than one server per kit.",
   "type": "module",
-  "main": "./dist/server.js",
-  "types": "./dist/server.d.ts",
+  "main": "./dist/embed.js",
+  "types": "./dist/embed.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/server.d.ts",
-      "default": "./dist/server.js"
+      "types": "./dist/embed.d.ts",
+      "import": "./dist/embed.js"
     }
   },
   "bin": {
