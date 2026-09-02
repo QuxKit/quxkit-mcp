@@ -26,12 +26,21 @@ export const billingKit: KitModule = {
   name: 'billing-kit',
 
   async register(server, env) {
-    // The deep path, not the bare specifier. `@quxkit/billing-kit-mcp` declares
-    // a `bin` and neither `main` nor `exports`, so the package name alone does
-    // not resolve to anything — it was published to be spawned, not imported.
-    // Its lack of an `exports` map is what makes this path reachable at all.
-    const mod = await optionalImport<BillingMcp>('@quxkit/billing-kit-mcp/dist/index.js');
-    if (!mod) return [];
+    // The bare specifier first, the deep path second, and the order matters
+    // in both directions.
+    //
+    // That package used to declare a `bin` and neither `main` nor `exports`,
+    // so only the deep path resolved — it was published to be spawned, not
+    // imported. It now exports its registrations properly, and an `exports`
+    // map CLOSES every path it does not name: the deep import that was the
+    // only way in became the one way that fails. Trying the bare name first
+    // and keeping the old path as a fallback works against both, which is
+    // what a server that mounts whatever an operator happens to have installed
+    // has to do.
+    const mod =
+      (await optionalImport<BillingMcp>('@quxkit/billing-kit-mcp')) ??
+      (await optionalImport<BillingMcp>('@quxkit/billing-kit-mcp/dist/index.js'));
+    if (!mod?.registerLedgerTools) return [];
 
     // Arithmetic and discovery: no connection, no configuration, always safe.
     mod.registerLedgerTools(server);
