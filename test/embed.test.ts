@@ -18,7 +18,9 @@ const fake: KitModule = {
     (server as { registerTool: (n: string, c: unknown, h: unknown) => unknown }).registerTool(
       'money_add',
       { title: 'Add money', description: 'Exact addition', inputSchema: { a: 'number' } },
-      async (args: Record<string, unknown>) => ({ content: [{ type: 'text', text: String(Number(args.a) + 1) }] }),
+      async (args: Record<string, unknown>) => ({
+        content: [{ type: 'text', text: String(Number(args.a) + 1) }],
+      }),
     );
     return ['money_add'];
   },
@@ -29,7 +31,10 @@ const legacy: KitModule = {
   name: 'ui-kit',
   async register(server) {
     (server as { tool: (n: string, d: string, s: unknown, h: unknown) => unknown }).tool(
-      'ui_vocab', 'The vocabulary', {}, async () => ({ content: [] }),
+      'ui_vocab',
+      'The vocabulary',
+      {},
+      async () => ({ content: [] }),
     );
     return ['ui_vocab'];
   },
@@ -38,7 +43,10 @@ const legacy: KitModule = {
 describe('familyTools', () => {
   it('returns what the kits registered, as values', async () => {
     const { tools } = await familyTools({}, [fake]);
-    assert.deepEqual(tools.map((t) => t.name), ['money_add']);
+    assert.deepEqual(
+      tools.map((t) => t.name),
+      ['money_add'],
+    );
     assert.equal(tools[0]!.description, 'Exact addition');
     assert.deepEqual(tools[0]!.inputSchema, { a: 'number' });
   });
@@ -53,7 +61,10 @@ describe('familyTools', () => {
     // A kit built against an earlier SDK should not be excluded from embedding
     // by the shape of its call.
     const { tools } = await familyTools({}, [legacy]);
-    assert.deepEqual(tools.map((t) => t.name), ['ui_vocab']);
+    assert.deepEqual(
+      tools.map((t) => t.name),
+      ['ui_vocab'],
+    );
   });
 
   it('reports kits the same way the stdio server does', async () => {

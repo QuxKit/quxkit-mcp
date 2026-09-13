@@ -16,13 +16,32 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE",
+    "NOTICE"
   ],
   "engines": {
     "node": ">=22.13.0"
   },
   "packageManager": "pnpm@11.20.0",
-  "private": true,
+  "license": "BUSL-1.1",
+  "author": "QuxKit.AI (https://quxkit.ai)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuxKit/quxkit-mcp.git"
+  },
+  "homepage": "https://quxkit.ai",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "billing",
+    "identity",
+    "multi-tenancy",
+    "email",
+    "quxkit",
+    "agents"
+  ],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
