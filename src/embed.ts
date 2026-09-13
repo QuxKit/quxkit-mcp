@@ -72,7 +72,12 @@ export async function familyTools(
     // Older registrations use `tool(name, description, schema, handler)`.
     // Supported because a kit built against an earlier SDK should not be
     // excluded from embedding by the shape of its call.
-    tool(name: string, description: string, inputSchema: unknown, handler: (args: Record<string, unknown>) => unknown) {
+    tool(
+      name: string,
+      description: string,
+      inputSchema: unknown,
+      handler: (args: Record<string, unknown>) => unknown,
+    ) {
       tools.push({ name, description, inputSchema, run: async (args) => handler(args ?? {}) });
       return { name };
     },

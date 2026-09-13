@@ -2,7 +2,7 @@
 
 **QuxKit** · one MCP server for the whole family
 
-![status](https://img.shields.io/badge/status-v0.1-d29922) ![licence](https://img.shields.io/badge/licence-undecided-6e7681) ![tests](https://img.shields.io/badge/tests-15-2ea043)
+![status](https://img.shields.io/badge/status-v0.1-d29922) ![licence](https://img.shields.io/badge/licence-BUSL--1.1-8256d0) ![tests](https://img.shields.io/badge/tests-15-2ea043)
 
 There used to be one server per kit — `billing-kit-mcp`, `ui-kit-mcp`, each its
 own binary and its own entry in a client's config. That scales badly in the
@@ -133,3 +133,13 @@ Nothing here grants anyone anything and nothing reaches npm by accident. That is
 the reversible default; declaring a licence nobody chose is not — and it matters
 more here than usual, because this server sits next to kits under three
 different licences.
+
+## Licence
+
+Business Source License 1.1 (`BUSL-1.1`), in the same shape as billing-kit:
+run it inside your own applications, agents and development tools, against
+your own systems, free of charge. Offering it as a hosted or managed service,
+or inside a competing commercial product, takes a commercial licence. Each
+version converts to the Apache License 2.0 on its Change Date (2030-09-13 for
+this one). There is no licence check, no seat check and no call home in the
+code; the obligation is contractual. See `LICENSE` and `NOTICE`.
